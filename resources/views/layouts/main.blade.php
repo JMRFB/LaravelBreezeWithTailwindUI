@@ -12,17 +12,19 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css'])
+        <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     </head>
     <body class="font-sans antialiased">
         <div class="relative min-h-screen md:flex" x-data="{ open: true }">
 
             <!-- sidebar -->
-            <aside :class="{ -translate-x-full: !open }" class="z-10 bg-blue-800 text-blue-100 w-64 px-2 py-4 absolute inset-y-0 left-0 md:relative transform -translate-x-full md:translate-x-0
+            <aside x-cloak :class="{ '-translate-x-full': !open }" class="z-10 bg-blue-800 text-blue-100 w-64 px-2 py-4 absolute inset-y-0 left-0 md:relative transform -translate-x-full md:translate-x-0
             overflow-y-auto transition ease-in-out duration-300 shadow-lg">
             <!-- logo -->
                 <div class="flex items-center justify-between px-2">
-                    <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-2"> 
                         <a href="">
                             @include('components.application-logo')
                         </a>
@@ -30,7 +32,7 @@
                             Admin
                         </span>
                     </div>
-                    <button type="button" class="lg:hidden inline-flex p-2 items-center justify-center rounded-md text-blue-100 hover:bg-blue-700 focus:outline-none">
+                    <button type="button" @click="open = !open" class="lg:hidden inline-flex p-2 items-center justify-center rounded-md text-blue-100 hover:bg-blue-700 focus:outline-none">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                         </svg>
@@ -38,15 +40,39 @@
                 </div>
 
                 <!-- Nav Links -->
-                <nav>
-
+                <nav class="mt-4 flex flex-col gap-2">
+                    <x-side-nav-link href="{{ URL('dashboard') }}" :active="request()->routeIs('dashboard')">
+                        Dashboard
+                    </x-side-nav-link>
+                    <x-side-nav-link href="{{ URL('features') }}" :active="request()->routeIs('features')">
+                        Features
+                    </x-side-nav-link>
+                    <x-side-nav-link href="{{ URL('about') }}" :active="request()->routeIs('about')">
+                        About
+                    </x-side-nav-link>
+                    <x-side-nav-link href="{{ URL('contact') }}" :active="request()->routeIs('contact')">
+                        Contact
+                    </x-side-nav-link>
                 </nav>
             </aside>
     
             <!-- main content -->
-            <main>
-                <nav>
-                   
+            <main class="flex-1 bg-gray-100 h-screen">
+                <nav class="bg-blue-900 shadow-lg">
+                   <div class="mx-auto px-2 sm:px-6 lg:px-8">
+                        <div class="relative flex item-center justify-between md:justify-end h-16">
+                            <div class="absolute inset-y-0 left-0 flex items-center md:hidden">
+                                <!-- mobile button -->
+                                <button type="button" @click="open = !open" @click.away="open = false" class="inline-flex items-center justify-center p-2 rounded-md text-blue-100
+                                    hover:bg-blue-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                                    </svg>
+
+                                </button>
+                            </div>
+                        </div>
+                   </div>
                 </nav>
                 {{ $slot }}
             </main>
