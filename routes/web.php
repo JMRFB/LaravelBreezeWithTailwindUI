@@ -12,15 +12,15 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/features', function () {
-    return view('dashboard');
+    return view('features');
 })->middleware(['auth', 'verified'])->name('features');
 
 Route::get('/about', function () {
-    return view('dashboard');
+    return view('about');
 })->middleware(['auth', 'verified'])->name('about');
 
 Route::get('/contact', function () {
-    return view('dashboard');
+    return view('contact');
 })->middleware(['auth', 'verified'])->name('contact');
 
 Route::middleware('auth')->group(function () {

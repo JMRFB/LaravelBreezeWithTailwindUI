@@ -12,23 +12,23 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css'])
-        <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
 
     </head>
     <body class="font-sans antialiased min-h-screen h-full">
-        <div class="relative min-h-fit md:flex h-fit" x-data="{ open: true }">
+        <div class="relative min-h-fit md:flex h-fit">
 
             <!-- sidebar -->
             @include('layouts.sideBar')
             <!-- main content -->
-            <main class="flex-1 bg-gray-100 min-h-screen h-fit">
+            <main class="flex-1 bg-gray-100 min-h-screen h-fit pl-0 md:pl-64 transition-all duration-300">
                 <nav class="bg-blue-900 shadow-lg">
                    <div class="mx-auto px-2 sm:px-6 lg:px-8">
                         <div class="flex item-center justify-between md:justify-end h-16">
                             <div class="flex items-center md:hidden">
                                 <!-- mobile button -->
-                                <button type="button" @click="open = !open" @click.away="open = false" class="inline-flex items-center justify-center p-2 rounded-md text-blue-100
+                                <button type="button" id="openSideBar" class="inline-flex items-center justify-center p-2 rounded-md text-blue-100
                                     hover:bg-blue-700">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
